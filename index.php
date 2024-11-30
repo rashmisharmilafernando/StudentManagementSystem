@@ -12,7 +12,7 @@
 <body>
     <div class="container my-5">
         <h2>List of Student</h2>
-        <a class="btn btn-primary" href="/samadiInsitute/newStudent.php" role="button">New Student</a>
+        <a class="btn btn-primary" href="/StudentManagementSystem/newStudent.php" role="button">New Student</a>
         <br>
         <table class="table">
             <thead>
@@ -27,19 +27,47 @@
                 </tr>
             </thead>
             <tbody>
-                
-                <tr>
-                    <td>01</td>
-                    <td>Rashmi Sharmila</td>
-                    <td>rshi0430@gmail.com</td>
-                    <td>0774748401</td>
-                    <td>No 194/A Galle Rd,Wadduwa</td>
-                    <td>30/11/2024</td>
-                    <td>
-                        <a href="/samadiInsitute/editStudent.php" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="/samadiInsitute/deleteStudent.php" class="btn btn-danger btn-sm">Delete</a>
-                    </td>
-                </tr>
+                <?php
+                // Create connection
+                $servername = "localhost";
+                $username = "root";
+                $password = "";
+                $database = "studentdb";
+
+                // Check connection
+                $conn = new mysqli($servername, $username, $password, $database);
+                if ($conn->connect_error) {
+                    die("Connection Failed: " . $conn->connect_error);
+                }
+
+                // Read all rows from database table
+                $sql = "SELECT * FROM Student";
+                $result = $conn->query($sql);
+
+                if (!$result) {
+                    die("Invalid Query: " . $conn->error);
+                }
+
+                while ($row = $result->fetch_assoc()) {
+                    echo "
+    <tr>
+        <td>{$row['id']}</td>
+        <td>{$row['name']}</td>
+        <td>{$row['email']}</td>
+        <td>{$row['phone']}</td>
+        <td>{$row['address']}</td>
+        <td>{$row['created_at']}</td>
+        <td>
+            <a href='/samadiInsitute/editStudent.php?id={$row['id']}' class='btn btn-primary btn-sm'>Edit</a>
+            <a href='/samadiInsitute/deleteStudent.php?id={$row['id']}' class='btn btn-danger btn-sm'>Delete</a>
+        </td>
+    </tr>
+    ";
+                }
+                ?>
+
+
+
             </tbody>
 
 
