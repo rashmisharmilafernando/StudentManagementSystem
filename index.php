@@ -58,8 +58,9 @@
         <td>{$row['address']}</td>
         <td>{$row['created_at']}</td>
         <td>
-            <a href='/samadiInsitute/editStudent.php?id={$row['id']}' class='btn btn-primary btn-sm'>Edit</a>
-            <a href='/samadiInsitute/deleteStudent.php?id={$row['id']}' class='btn btn-danger btn-sm'>Delete</a>
+           <a href='/StudentManagementSystem/editStudent.php?id=$row[id]' class='btn btn-primary btn-sm'>Edit</a>
+
+            <a href='/StudentManagementSystem/deleteStudent.php?id=$row[id]' class='btn btn-danger btn-sm'>Delete</a>
         </td>
     </tr>
     ";
